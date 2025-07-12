@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  vue-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev-stage # Използва dev stage от Dockerfile
+    volumes:
+      - .:/app          # Монтира локалните файлове
+      - /app/node_modules # Изключва node_modules
+    ports:
+      - "5173:5173"     # Пренасочва порта на Vue CLI dev сървъра
+    environment:
+      - CHOKIDAR_USEPOLLING=true # Включва polling
